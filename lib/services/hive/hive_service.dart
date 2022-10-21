@@ -2,21 +2,30 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 class HiveKeys {
   static const isRegistered = "is_registered";
+
+  static const intUserId = "int_user_id";
 }
 
 class SavedData {
   static late bool isRegistered;
+
+  static late int intUserId;
 
   static Map<String, dynamic> getData() {
     return <String, dynamic>{
       // bool
       HiveKeys.isRegistered:
           myBox.get(HiveKeys.isRegistered, defaultValue: false),
+
+      // int
+      HiveKeys.intUserId: myBox.get(HiveKeys.intUserId, defaultValue: 0),
     };
   }
 
   static setData(Map<String, dynamic> map) {
     isRegistered = map[HiveKeys.isRegistered];
+
+    intUserId = map[HiveKeys.intUserId];
   }
 }
 
@@ -36,6 +45,17 @@ class HiveService {
   Future<void> saveIsRegistered(bool value) async {
     await myBox.put(HiveKeys.isRegistered, value);
     SavedData.isRegistered = value;
+  }
+
+  //******************************************************
+  //******************************************************
+  // int
+  //******************************************************
+  //******************************************************
+
+  Future<void> saveIntUserId(int value) async {
+    await myBox.put(HiveKeys.intUserId, value);
+    SavedData.intUserId = value;
   }
 
   //******************************************************

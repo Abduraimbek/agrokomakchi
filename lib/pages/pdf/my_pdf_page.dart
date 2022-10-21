@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:agrokomakchi/providers/providers.dart';
 import 'package:agrokomakchi/services/services.dart';
 import 'package:flutter/material.dart';
@@ -28,6 +26,10 @@ class _MyPdfPageState extends ConsumerState<MyPdfPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(model.title),
+        leading: BackButton(
+          onPressed: () => Navigator.of(context).pop(),
+          color: Colors.white,
+        ),
       ),
       body: PdfPreview(
         build: (_) async {

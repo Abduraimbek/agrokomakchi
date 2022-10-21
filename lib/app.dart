@@ -1,4 +1,5 @@
 import 'package:agrokomakchi/pages/pages.dart';
+import 'package:agrokomakchi/services/services.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
@@ -16,12 +17,13 @@ class App extends StatelessWidget {
         useMaterial3: true,
         useMaterial3ErrorColors: true,
         scheme: FlexScheme.green,
+        appBarStyle: FlexAppBarStyle.primary,
       ),
       builder: (context, child) {
         return _UnFocus(child: child!);
       },
       routes: _routes,
-      initialRoute: homePage,
+      initialRoute: SavedData.isRegistered ? homePage : loginPage,
     );
   }
 
@@ -30,12 +32,14 @@ class App extends StatelessWidget {
     innerPage: (_) => const InnerPage(),
     pdfPage: (_) => const MyPdfPage(),
     loginPage: (_) => const LoginPage(),
+    registerPage: (_) => const RegisterPage(),
   };
 
   static const homePage = "/homePage";
   static const innerPage = "/innerPage";
   static const pdfPage = "/pdfPage";
   static const loginPage = "/loginPage";
+  static const registerPage = "/registerPage";
 }
 
 class _UnFocus extends StatelessWidget {

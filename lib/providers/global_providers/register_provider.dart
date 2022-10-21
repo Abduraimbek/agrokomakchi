@@ -9,16 +9,21 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:http/http.dart' as http;
 
-final loginProvider =
-    StateNotifierProvider.autoDispose<LoginNotifier, bool>((ref) {
-  return LoginNotifier();
+final registerProvider =
+    StateNotifierProvider.autoDispose<RegisterNotifier, bool>((ref) {
+  return RegisterNotifier();
 });
 
-class LoginNotifier extends StateNotifier<bool> {
-  LoginNotifier() : super(true);
+class RegisterNotifier extends StateNotifier<bool> {
+  RegisterNotifier() : super(true);
 
+  String name = "";
   String login = "";
   String password = "";
+
+  void typeName(String value) {
+    name = value;
+  }
 
   void typeLogin(String value) {
     login = value;
@@ -28,7 +33,7 @@ class LoginNotifier extends StateNotifier<bool> {
     password = value;
   }
 
-  Future<void> pressLoginButton() async {
+  Future<void> pressRegisterButton() async {
     state = false;
 
     final internet = await myCheckConnection();
@@ -41,9 +46,10 @@ class LoginNotifier extends StateNotifier<bool> {
 
     try {
       final response = await http.post(
-        Uri.parse("${AppConsts.baseUrl}signInAK"),
+        Uri.parse("${AppConsts.baseUrl}signUpAK"),
         headers: AppConsts.headers,
         body: jsonEncode({
+          "full_name": name,
           "login": login,
           "password": password,
         }),

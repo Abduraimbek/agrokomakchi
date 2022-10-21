@@ -23,6 +23,10 @@ class InnerPage extends ConsumerWidget {
               ? "КАСАЛЛИКЛАР"
               : "ЗАРАРКУНАНДАЛАР",
         ),
+        leading: BackButton(
+          onPressed: () => Navigator.of(context).pop(),
+          color: Colors.white,
+        ),
       ),
       body: ListView.separated(
         padding: const EdgeInsets.symmetric(vertical: 20),

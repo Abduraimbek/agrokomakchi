@@ -3,21 +3,21 @@ import 'package:agrokomakchi/providers/providers.dart';
 import 'package:agrokomakchi/utils/utils.dart';
 import 'package:flutter/material.dart';
 
-class LoginPage extends ConsumerStatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+class RegisterPage extends ConsumerStatefulWidget {
+  const RegisterPage({Key? key}) : super(key: key);
 
   @override
-  ConsumerState createState() => _LoginPageState();
+  ConsumerState createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends ConsumerState<LoginPage> {
+class _RegisterPageState extends ConsumerState<RegisterPage> {
   bool secured = true;
   final formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final buttonEnabled = ref.watch(loginProvider);
+    final buttonEnabled = ref.watch(registerProvider);
 
     return Scaffold(
       body: Center(
@@ -43,7 +43,23 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                     }
                     return null;
                   },
-                  onChanged: ref.read(loginProvider.notifier).typeLogin,
+                  onChanged: ref.read(registerProvider.notifier).typeName,
+                  decoration: const InputDecoration(
+                    isDense: true,
+                    prefixIcon: Icon(Icons.person_rounded),
+                    border: OutlineInputBorder(),
+                    hintText: "Исм",
+                  ),
+                ),
+                const SizedBox(height: 20),
+                TextFormField(
+                  validator: (value) {
+                    if (value == null || value.length < 4) {
+                      return AppConsts.lanValidator;
+                    }
+                    return null;
+                  },
+                  onChanged: ref.read(registerProvider.notifier).typeLogin,
                   textInputAction: TextInputAction.next,
                   decoration: const InputDecoration(
                     isDense: true,
@@ -60,7 +76,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                     }
                     return null;
                   },
-                  onChanged: ref.read(loginProvider.notifier).typePassword,
+                  onChanged: ref.read(registerProvider.notifier).typePassword,
                   textInputAction: TextInputAction.done,
                   obscureText: secured,
                   decoration: InputDecoration(
@@ -87,22 +103,23 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                   onPressed: buttonEnabled
                       ? () {
                           if (formKey.currentState!.validate()) {
-                            ref.read(loginProvider.notifier).pressLoginButton();
+                            ref
+                                .read(registerProvider.notifier)
+                                .pressRegisterButton();
                           }
                         }
                       : null,
                   style: ElevatedButton.styleFrom(
                     minimumSize: const Size.fromHeight(50),
                   ),
-                  child: const Text("Логин"),
+                  child: const Text("Рўйҳатдан ўтиш"),
                 ),
                 const SizedBox(height: 10),
                 TextButton(
                   onPressed: () {
-                    Navigator.of(context)
-                        .pushReplacementNamed(App.registerPage);
+                    Navigator.of(context).pushReplacementNamed(App.loginPage);
                   },
-                  child: const Text("Рўйҳатдан ўтиш"),
+                  child: const Text("Логин"),
                 ),
               ],
             ),

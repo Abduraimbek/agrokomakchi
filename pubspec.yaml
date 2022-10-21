@@ -6,20 +6,24 @@ publish_to: 'none'
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.17.6 <3.0.0"
+  sdk: ">=2.18.2 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.5
-  hooks_riverpod: ^2.0.0-dev.9
+  hooks_riverpod: ^2.0.2
   flutter_hooks: ^0.18.5+1
   hive: ^2.2.3
   hive_flutter: ^1.1.0
+  freezed_annotation: ^2.2.0
+  http: ^0.13.5
 
-  flex_color_scheme: ^5.1.0
+  flex_color_scheme: ^6.0.1
   equatable: ^2.0.5
   collection: ^1.16.0
+  connectivity_plus: ^3.0.2
+  logger: ^1.1.0
 
   printing: ^5.9.3
 
@@ -28,6 +32,8 @@ dev_dependencies:
     sdk: flutter
   flutter_lints: ^2.0.1
   flutter_launcher_icons: ^0.10.0
+  freezed: ^2.2.0
+  build_runner: ^2.3.2
 
 flutter:
   uses-material-design: true
